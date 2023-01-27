@@ -1,0 +1,38 @@
+/*
+Approach
+    First, we will make a variable total(length of linked list). after that will count the total length by         using the while loop.
+    Then we will reverse the given linked list according to size – next – (next of current element), prev –         ( previous element of current), and current.
+    Then we will decrease the total length by k after reversing the linked list and will check if the total         length will be greater or equal to k then we will do the previous steps by using recursion.
+    Else will link to the remaining node of the linked list.
+    At last, we will return to the prev.
+*/
+
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        int total = 0;
+        ListNode current = head;
+        while(current != null){    
+            total++;
+            current = current.next;
+        }
+        int count = 0;
+        ListNode prev = null;
+        ListNode c = head;
+        ListNode next = null;
+        while(c != null && count < k){
+            next = c.next;
+            c.next = prev;
+            prev = c;
+            c = next;
+            count++;
+        }
+        total = total-k;
+        if(total >= k){
+            head.next = reverseKGroup(next,k);
+        }
+        else{
+            head.next = next;
+        }
+        return prev;   
+    }
+}
