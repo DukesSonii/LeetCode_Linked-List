@@ -1,0 +1,22 @@
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+        ListNode p = headA;
+        ListNode q = headB;
+        //if p and q are equal they will come out of while loop are return any of the two either p or q 
+        while (p != q) {
+            //jab p null hpjayaga toh usko apn headB par lejayanga else move p to next step
+            if(p == null)
+                p=headB;
+            else
+                p=p.next;
+            if(q == null)
+                q=headA;
+            else
+                q=q.next;
+        }
+         return p;
+    }
+}
